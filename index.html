@@ -13,18 +13,34 @@
 
     <div class="jumbotron" id="jumbo">
         <h1 class="display-4 text-center">Play with Your Food</h1>
-        <p class="lead text-center">Press the buttons to see gifs about these foods. Or you can add your own buttons with your favorite foods.</p>
-
-      
+        <p class="lead text-center">Press the buttons to see gifs about these foods.</p>
+        <p class="lead text-center"> Or you can add your own buttons with your favorite foods.</p>
     </div>
  
-        <!-- Buttons for different foods will go here  -->
-        <div id="food-buttons"></div>
-
-        <!-- Add a form here so user can add a food button  -->
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <!-- Buttons for different foods will go here  -->
+                <div id="food-buttons"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-8">
+                    <!-- Put the food gifs here -->
+                    <div id="food-gifs"></div>
+            </div>
+            <div class="col-4">
+                <!-- Add a form here so user can add their own a food button  -->
+                <form>
+                <div class="form-group">
+                    <label for="newFoodInput">Add Your Favorite Food</label>
+                    <input type="text" class="form-control" id="newFoodInput">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
        
-        <!-- Put the food gifs here -->
-        <div id="food-gifs"></div>
 
     </div>
 
