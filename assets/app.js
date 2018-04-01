@@ -82,12 +82,21 @@ function displayFood() {
         console.log(response);
         // store array of results in results variable
         var results = response.data;
-        // loop through each results[i] in array
+        // loop through each results[i] in array and make place to display image
         for (var j=0; j<results.length; j++) {
+            // make a div to hold image and rating
+            var gifDiv = $("<div>");
             var foodImg = $("<img>");
             foodImg.attr("src", results[j].images.fixed_height_still.url);
             //foodImg.attr("alt", results[j].images.title);
-            $("#food-gifs").prepend(foodImg);
+            // under every gif, display its rating
+            var rating = results[j].rating;
+            var displayRating = $("<p>").text("Rating: " + rating);
+            // append foodImg and displayRating to gifDiv so they can be treated as a unit
+            gifDiv.append(foodImg);
+            gifDiv.append(displayRating);
+            $("#food-gifs").prepend(gifDiv);
+
         }
     })
     
