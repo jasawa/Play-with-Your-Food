@@ -69,7 +69,10 @@ function displayFood() {
     var foodie = $(this).attr("nameOfFood");  //this refers to button that was clicked
     console.log(foodie);
 
-    var queryURL = "https://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC&tag=" + foodie;
+    // Note: "random" returns as a single object and search?q returns as an array with default of 25
+    //var queryURL = "https://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC&tag=" + foodie + "&limit=2";
+
+    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + foodie + "&api_key=dc6zaTOxFJmzC&limit=10";
 
     $.ajax({
         url: queryURL,
@@ -77,12 +80,15 @@ function displayFood() {
     })
     .then(function(response) {
         console.log(response);
-        var imageUrl = response.data.images.fixed_height_still.url;
-        var spaghettiImage = $("<img>");
-        spaghettiImage.attr("src", imageUrl);
-        spaghettiImage.attr("alt", "plate of spaghetti");
-        $("#food-gifs").prepend(spaghettiImage);
-
+        // store array of results in results variable
+        var results = response.data;
+        // loop through each results[i] in array
+        for (var j=0; j<results.length; j++) {
+            var foodImg = $("<img>");
+            foodImg.attr("src", results[j].images.fixed_height_still.url);
+            //foodImg.attr("alt", results[j].images.title);
+            $("#food-gifs").prepend(foodImg);
+        }
     })
     
 }
