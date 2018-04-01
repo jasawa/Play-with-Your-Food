@@ -12,7 +12,7 @@ function renderButtons() {
     // loops through current array of foods
     for (var i=0; i<topics.length; i++) {
         var b = $("<button>");
-        b.attr("class", "foods");
+        b.addClass("foods btn btn-warning");
         b.attr("nameOfFood", topics[i]);
         // adds the name of the food from the array to the button
         b.text(topics[i]);
@@ -20,6 +20,22 @@ function renderButtons() {
         $("#food-buttons").append(b);
     }
 }
+
+// Function adds a new food button when input box is filled out and submit button is clicked
+$("#add-food").on("click", function(event) {
+    // form will allow user to click enter instead of submit button, preventDefault will
+    // prevent the form from trying to submit itself
+    event.preventDefault();
+    // variable will hold the text from the input box
+    var newFood = $("#newFoodInput").val().trim();
+    topics.push(newFood);
+    // displays a blank space in input field after user submits new food
+    $("#newFoodInput").val("");
+
+    renderButtons();
+})
+
+
 // call the renderButtons function to display the initial list of food buttons
 renderButtons();
 
