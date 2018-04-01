@@ -28,11 +28,19 @@ $("#add-food").on("click", function(event) {
     event.preventDefault();
     // variable will hold the text from the input box
     var newFood = $("#newFoodInput").val().trim();
-    topics.push(newFood);
-    // displays a blank space in input field after user submits new food
-    $("#newFoodInput").val("");
 
-    renderButtons();
+    // if the inputed new food is not already in the topics array, add it to array and make a button
+    if (topics.indexOf(newFood) < 0) {
+        // adds the new food to the topics array
+        topics.push(newFood);
+        // displays a blank space in input field after user submits new food
+        $("#newFoodInput").val("");
+        renderButtons();
+    }
+    else {
+        $("#newFoodInput").val("");
+    }
+    
 })
 
 
