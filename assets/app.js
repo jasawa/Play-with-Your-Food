@@ -29,7 +29,7 @@ $("#add-food").on("click", function(event) {
     // variable will hold the text from the input box
     var newFood = $("#newFoodInput").val().trim();
 
-    // if the inputed new food is not already in the topics array, add it to array and make a button
+    // if the inputed new food is not already in the topics array, add it to array and remake all button
     if (topics.indexOf(newFood) < 0) {
         // adds the new food to the topics array
         topics.push(newFood);
@@ -42,10 +42,6 @@ $("#add-food").on("click", function(event) {
     }
     
 })
-
-
-// call the renderButtons function to display the initial list of food buttons
-renderButtons();
 
 // test with cat-button as model
 /*
@@ -67,3 +63,31 @@ $(".button").on("click", function() {
     })
     
 }) */
+
+// Function 
+function displayFood() {
+    var foodie = $(this).attr("nameOfFood");  //this refers to button that was clicked
+    console.log(foodie);
+
+    var queryURL = "https://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC&tag=" + foodie;
+
+    $.ajax({
+        url: queryURL,
+        method: "GET"
+    })
+    .then(function(response) {
+        console.log(response);
+        var imageUrl = response.data.images.fixed_height_still.url;
+        var spaghettiImage = $("<img>");
+        spaghettiImage.attr("src", imageUrl);
+        spaghettiImage.attr("alt", "plate of spaghetti");
+        $("#food-gifs").prepend(spaghettiImage);
+
+    })
+    
+}
+// Add event listener for click on any button with class of "foods"
+$(document).on("click", ".foods", displayFood);
+
+// call the renderButtons function to display the initial list of food buttons
+renderButtons();
