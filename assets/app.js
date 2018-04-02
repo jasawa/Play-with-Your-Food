@@ -88,10 +88,17 @@ function displayFood() {
             var gifDiv = $("<div>");
             var foodImg = $("<img>");
             foodImg.attr("src", results[j].images.fixed_height_still.url);
-            //foodImg.attr("alt", results[j].images.title);
+                    // try to add alt to the gif images
+                    //foodImg.attr("alt", results.title);
+            // add more attributes to each <img> so user will be able to toggle animate and still
+            foodImg.attr("data-animate", results[j].images.fixed_height.url);
+            foodImg.attr("data-still", results[j].images.fixed_height_still.url);
+            foodImg.attr("data-state", "still");
+            foodImg.addClass("gif");
             // under every gif, display its rating
             var rating = results[j].rating;
             var displayRating = $("<p>").text("Rating: " + rating);
+            
             // append foodImg and displayRating to gifDiv so they can be treated as a unit
             gifDiv.append(foodImg);
             gifDiv.append(displayRating);
@@ -101,6 +108,22 @@ function displayFood() {
     })
     
 }
+// function to toggle image from still to animate when user clicks the gif
+function changeGif() {
+    var state = $(this).attr("data-state");
+    if (state === "still") {
+        $(this).attr("src", $(this).attr("data-animate"));  // if data-state is still, change src to data-animate
+        $(this).attr("data-state", "animate");
+    }
+    else {
+        $(this).attr("src", $(this).attr("data-still"));  // if data-state is animate, change src to data-still
+        $(this).attr("data-state", "still");  
+    }
+}
+
+// Add event listener for click on gifs with class gif
+$(document).on("click", ".gif", changeGif);
+
 // Add event listener for click on any button with class of "foods"
 $(document).on("click", ".foods", displayFood);
 
