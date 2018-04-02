@@ -86,10 +86,11 @@ function displayFood() {
         for (var j=0; j<results.length; j++) {
             // make a div to hold image and rating
             var gifDiv = $("<div>");
+            gifDiv.addClass("gifDivFloater")
             var foodImg = $("<img>");
             foodImg.attr("src", results[j].images.fixed_height_still.url);
-                    // try to add alt to the gif images
-                    //foodImg.attr("alt", results.title);
+            // add alt to the gif images
+            foodImg.attr("alt", results[j].title);
             // add more attributes to each <img> so user will be able to toggle animate and still
             foodImg.attr("data-animate", results[j].images.fixed_height.url);
             foodImg.attr("data-still", results[j].images.fixed_height_still.url);
@@ -102,6 +103,7 @@ function displayFood() {
             // append foodImg and displayRating to gifDiv so they can be treated as a unit
             gifDiv.append(foodImg);
             gifDiv.append(displayRating);
+            // prepend gifDiv to id=food-gifs location on the html
             $("#food-gifs").prepend(gifDiv);
 
         }
@@ -121,7 +123,7 @@ function changeGif() {
     }
 }
 
-// Add event listener for click on gifs with class gif
+// Add event listener for click on gifs with class=gif
 $(document).on("click", ".gif", changeGif);
 
 // Add event listener for click on any button with class of "foods"
