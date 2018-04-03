@@ -29,8 +29,8 @@ $("#add-food").on("click", function(event) {
     // variable will hold the text from the input box
     var newFood = $("#newFoodInput").val().trim();
 
-    // if the inputed new food is not already in the topics array, add it to array and remake all button
-    if (topics.indexOf(newFood) < 0) {
+    // if the inputed new food is not already in the topics array, add it to array and remake all buttons
+    if (topics.indexOf(newFood) < 0) {  
         // adds the new food to the topics array
         topics.push(newFood);
         // displays a blank space in input field after user submits new food
@@ -43,28 +43,8 @@ $("#add-food").on("click", function(event) {
     
 })
 
-// test with cat-button as model
-/*
-$(".button").on("click", function() {
-    var queryURL = "https://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC&tag=lettuce";
 
-    $.ajax({
-        url: queryURL,
-        method: "GET"
-    })
-    .then(function(response) {
-        console.log(response);
-        var imageUrl = response.data.images.fixed_height.url;
-        var spaghettiImage = $("<img>");
-        spaghettiImage.attr("src", imageUrl);
-        spaghettiImage.attr("alt", "plate of spaghetti");
-        $("#food-gifs").prepend(spaghettiImage);
-
-    })
-    
-}) */
-
-// Function 
+// Function displays the appropriate food gifs when the button is clicked
 function displayFood() {
     var foodie = $(this).attr("nameOfFood");  //this refers to button that was clicked
     console.log(foodie);
